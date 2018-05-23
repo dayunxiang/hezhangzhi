@@ -26,7 +26,7 @@
       </Row>
       <Row>
         <Col>
-          <Table ref="table1" border :columns="column1" :data="tableData1"></Table>
+          <Table ref="table" border :columns="column1" :data="tableData1"></Table>
         </Col>
       </Row>
     </div>
@@ -243,11 +243,11 @@
 
       exportData(type) {  // 导出
         if (type === 1) {
-          this.$refs.table1.exportCsv({
+          this.$refs.table.exportCsv({
             filename: '巡查提醒'
           });
         } else if (type === 2) {
-          this.$refs.table1.exportCsv({
+          this.$refs.table.exportCsv({
             filename: '巡查提醒(排序后)',
             original: false
           });

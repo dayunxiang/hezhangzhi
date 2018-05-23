@@ -1,4 +1,3 @@
-``___****````````___``# hehe
 
 > A Vue.js project
 

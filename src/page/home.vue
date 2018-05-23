@@ -9,11 +9,11 @@
       <Col :sm="{ span:18}" :md="{ span:18}" :lg="{ span:18}">
         <Menu class="mainNav" ref="Menu" mode="horizontal" :active-name="active">
           <template v-for="(item,index) in meauList">
-            <MenuItem :name="index" :key="index">
-              <router-link :key="index" class="router" :to="item.name">{{
-                item.meta.title}}
-              </router-link>
-            </MenuItem>
+            <router-link :key="index" class="router" active-class="router-link-exact-active" :to="item.name">
+              <MenuItem :name="index" :key="index">
+                {{item.meta.title}}
+              </MenuItem>
+            </router-link>
           </template>
         </Menu>
       </Col>
@@ -32,7 +32,6 @@
           </Tooltip>
         </div>
         <Dropdown class="mainUser" trigger="click" placement="bottom-end">
-
           <a href="javascript:void(0)">
             <span>{{userMes?userMes:'admin'}}</span>
             <Icon type="arrow-down-b"></Icon>
@@ -41,7 +40,6 @@
             <router-link to="/login">
               <Dropdown-item @click.native="signOut">退出</Dropdown-item>
             </router-link>
-
           </Dropdown-menu>
         </Dropdown>
       </Col>
@@ -54,7 +52,6 @@
 <script>
   import Cookies from 'js-cookie';
   import {routes} from '../router/index';
-
   var flash_title = {
     doc: document,
     timer: null,
@@ -115,7 +112,6 @@
         contents: [],
         meauList: [],
         active: "0",
-
         msgtype: 1,  //1=inspectionReminder 2=problemHandling  3=problemHandling
       }
     },
@@ -142,10 +138,8 @@
       this.goEasy.subscribe({
         channel: 'addNotification',  //巡查提醒
         onMessage: (message) => {
-
           this.msgtype = 1;
           flash_title.flash()
-          console.log(message);
           this.contents.push(message.content)
         },
         onSuccess: function () {
@@ -158,10 +152,8 @@
       this.goEasy.subscribe({
         channel: 'updateRiver', //问题处理的提醒
         onMessage: (message) => {
-
           flash_title.flash()
           this.msgtype = 2;
-          console.log(message);
           this.contents.push(message.content)
         },
         onSuccess: function () {
@@ -174,10 +166,8 @@
       this.goEasy.subscribe({
         channel: 'addRiver_i',  // 提交问题的  提醒
         onMessage: (message) => {
-
           flash_title.flash()
           this.msgtype = 3;
-          console.log(message);
           this.contents.push(message.content)
         },
         onSuccess: function () {
@@ -222,8 +212,6 @@
           this.$router.push({name: 'login'});
         }
       }
-
-
     }
   };
 
@@ -287,24 +275,26 @@
       }
       .mainNav {
         background: #41b18b;
-        .ivu-menu-item {
+        a.router{
+          height: 100%;
 
-          .router {
-            text-align: center;
-            display: inline-block;
-            transition: all 0.2s;
-            color: #fff;
-            &.fade-enter-active {
-              opacity: 0;
-            }
-            &.fade-leave-active {
-              opacity: 0;
-            }
+          display: inline-block;
+          .ivu-menu-item{
+            box-sizing: border-box;
+            color:#fff;
           }
-          .router-link-exact-active {
-            color: red;
+          .ivu-menu-item-active.ivu-menu-item-selected{
+            border-bottom: 2px solid transparent;
+            color:#fff;
           }
         }
+        a.router-link-exact-active {
+          .ivu-menu-item{
+            color: red!important;
+            border-bottom: 2px solid #2d8cf0!important;
+          }
+        }
+
       }
       .mainUser {
         height: 100%;

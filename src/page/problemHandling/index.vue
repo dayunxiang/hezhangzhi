@@ -27,6 +27,11 @@
                 <Option value="6">城管局</Option>
               </Select>
             </FormItem>
+            <FormItem label="">
+              <Select v-model="search.river" placeholder="请选择水体" filterable>
+                <Option v-for="item in riverList" :value="item.riverId" :key="item.id">{{ item.riverName }}</Option>
+              </Select>
+            </FormItem>
             <FormItem>
               <Button type="error" icon="android-refresh" @click="reset()">重置</Button>
               <Button type="primary" icon="ios-download-outline" @click="exportData(1)">导出原始数据</Button>
@@ -102,11 +107,13 @@
         showhandleflag: false, //河长办
         showtreatflag: false, //养护
         ishzb:false,
+        riverList:[],
         search: {
-          dispose: '',
+          dispose: ''+this.$route.query.flag,  //要字符串类型
           isRead: '',
           date:[],
-          departtype:''
+          departtype:'',
+          river: this.$route.query.riverID ? this.$route.query.riverID :'',
         },
         options2: {
           shortcuts: [
@@ -410,6 +417,7 @@
         this.search.dispose = '';
         this.search.isRead = '';
         this.search.departtype = '';
+        this.search.river = '';
         this.search.date=[],
         this.changePageNumber(false)
       },
@@ -421,6 +429,7 @@
            end:this.dateFormat(this.search.date[1],'yyyy-MM-dd'),
            dispose: this.search.dispose,
            isRead: this.search.isRead,
+           riverId:  this.$route.query.riverID ? this.$route.query.riverID : this.search.river,
            departtype:   Cookies.get('type')== 7 ? this.search.departtype :　Cookies.get('type'),
            page: this.page = page ? page : 1,
            userId: Cookies.get('userid') ? Cookies.get('userid') : 31
@@ -429,6 +438,7 @@
          params=Object.assign({},{
            dispose: this.search.dispose,
            isRead: this.search.isRead,
+           riverId: this.search.river,
            departtype: Cookies.get('type')== 7 ? this.search.departtype :　Cookies.get('type'),
            page: this.page = page ? page : 1,
            userId: Cookies.get('userid') ? Cookies.get('userid') : 31
@@ -448,12 +458,19 @@
     computed: {
       atuomodeltop() {
         return document.documentElement.clientHeight > 660 ? '120px' : '2px'
-      }
+      },
+
     },
     created() {
+      //查询匹配水体
+      this.post('/mpRiver', {})
+        .then(resp => {
+          this.riverList = resp.data.data;
+        });
        this.ishzb =   Cookies.get('type') == 7 ?  true : false
     },
     mounted() {
+
     }
   }
 </script>

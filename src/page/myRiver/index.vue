@@ -88,8 +88,8 @@
         <FormItem label="起点" prop="origin">
           <Input type="text" v-model="formCustom2.origin"></Input>
         </FormItem>
-        <FormItem label="终点" prop="destination">
-          <Input type="text" v-model="formCustom2.destination"></Input>
+        <FormItem label="终点" prop="bXY">
+          <Input type="text" v-model="formCustom2.bXY"></Input>
         </FormItem>
         <FormItem label="级别" prop="riverType">
           <Select v-model="formCustom2.riverType" style="width:200px" placeholder="请选择级别">
@@ -115,11 +115,11 @@
           </Select>
         </FormItem>
 
-        <FormItem label="备注" prop="communityID">
-          <Input type="text" v-model="formCustom2.communityID"></Input>
+        <FormItem label="备注" prop="destination">
+          <Input type="text" v-model="formCustom2.destination"></Input>
         </FormItem>
-        <FormItem label="长度/面积" prop="communityID">
-          <Input type="text" v-model="formCustom2.communityID"></Input>
+        <FormItem label="长度/面积" prop="riverChief">
+          <Input type="text" v-model="formCustom2.riverChief"></Input>
         </FormItem>
 
 
@@ -136,6 +136,7 @@
 </template>
 
 <script>
+  import Cookies from 'js-cookie';
   import riverinfo from './mydata/riverinfo.vue';
   import {AmapUtils} from '@/config/amapUtils'
   import bengzhan from './mydata/bengzhan.js' //泵站
@@ -158,12 +159,14 @@
         },
         showaddriverflag: false,
         formCustom2: {
-          id: '',
+          userId: Cookies.get('userid') || '' ,
           riverType: 1,
           riverName: '',
           origin: '',
+          bXY: '',
           destination: '',
           streetID: '',
+          riverChief: '',
           communityID: '',
         },
         ruleCustom2: {

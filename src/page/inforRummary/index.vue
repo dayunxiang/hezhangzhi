@@ -57,9 +57,7 @@
       // 查询已处理问题百分比
       this.post('/disposePercent', {}).then(resp => {
         this.countByDispose = resp.data.data;
-        this.countByDisposetop5 = this.countByDispose.sort(function (a,b) {
-          a.disposecount>b.disposecount
-        }).slice(0,5);
+        this.countByDisposetop5 = this.countByDispose.slice(0,5);
       }).then(() => {
         this.createdwaterpolo();
 
@@ -631,7 +629,6 @@
         for (let i = 0; i < this.items.length; i++) {
           this.items[i].dataset.order = i + 1;
         }
-
         var vm = this;
         window.addEventListener('resize', function () {
           vm.charts.map(function (item) {

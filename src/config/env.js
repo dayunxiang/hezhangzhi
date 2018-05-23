@@ -11,11 +11,9 @@ let baseImgpath = '';
 if (process.env.NODE_ENV == 'development') {
   baseUrl = 'http://58.213.47.166:9013/hzzDemo/';
   baseImgpath = 'http://58.213.47.166:9013/hzzfile/';
-
 } else {
   baseUrl = 'http://hzz.cstor.cn:8967/hzz/';
   baseImgpath = 'http://hzz.cstor.cn:8967/hzzfile/';
-
 }
 export {
   baseUrl,

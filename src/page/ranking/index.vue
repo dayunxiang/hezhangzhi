@@ -207,12 +207,50 @@
             title: '处理中',
             key: 'processing',
             align: 'center',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'error' ,
+                    icon: 'log-in' ,
+
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.jumpto(params.row.riverID,params.row.userID,0)
+                    }
+                  }
+                }, '未处理')
+              ]);
+            }
           },{
             title: '已处理',
             key: 'processed',
             align: 'center',
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type:  'success',
+                    icon: 'checkmark-round',
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.jumpto(params.row.riverID,params.row.userID,2)
+                    }
+                  }
+
+                }, '已处理')
+              ]);
+            }
           },
           {
             title: '处理问题率(%)',
@@ -248,6 +286,9 @@
     },
     methods: {
       dateFormat,
+      jumpto(riverID,userID,flag){
+       this.$router.push({name:'problemHandling',query: { riverID: riverID,userID: userID,flag: flag }})
+      },
       rowclick(row, index) {
         // 命名的路由 另外打开
         const {href} = this.$router.resolve({

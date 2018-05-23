@@ -40,7 +40,7 @@ export const routes = [
         path: '/inspectionSummary',
         name: 'InspectionSummary',
         meta: {
-          title: '巡查总结'
+          title: '巡查总结',
         },
         component: (resolve) => require(['@/page/inspectionSummary'], resolve),
       },
@@ -94,14 +94,7 @@ export const routes = [
         },
         component: (resolve) => require(['@/page/riverLake'], resolve),
       },
-      // {
-      //   path: '/onePolicy',
-      //   name: 'onePolicy',
-      //   meta: {
-      //     title: '一河一策'
-      //   },
-      //   component: (resolve) => require(['@/page/onePolicy'], resolve),
-      //  },
+
       {
         path: '/governmentDoc',
         name: 'governmentDoc',
@@ -166,6 +159,6 @@ export const routes = [
 Vue.use(Router);
 export const router = new Router({
   // mode: 'history',
-  routes
+  routes,
 });
 
