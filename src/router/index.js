@@ -65,7 +65,7 @@ export const routes = [
         path: '/notification',
         name: 'notification',
         meta: {
-          title: '消息通知'
+          title: '通知公告'
         },
         component: (resolve) => require(['@/page/notification'], resolve),
       },

@@ -109,7 +109,7 @@
         ishzb:false,
         riverList:[],
         search: {
-          dispose: ''+this.$route.query.flag,  //要字符串类型
+          dispose: this.$route.query.flag!=undefined ? ''+this.$route.query.flag : '',  //要字符串类型
           isRead: '',
           date:[],
           departtype:'',
@@ -427,7 +427,7 @@
          params=Object.assign({},{         //4">建设局   5">环保局  6">城管局    7">河长办"
            begin:this.dateFormat(this.search.date[0],'yyyy-MM-dd') ,
            end:this.dateFormat(this.search.date[1],'yyyy-MM-dd'),
-           dispose: this.search.dispose,
+           dispose: this.search.dispose ,
            isRead: this.search.isRead,
            riverId:  this.$route.query.riverID ? this.$route.query.riverID : this.search.river,
            departtype:   Cookies.get('type')== 7 ? this.search.departtype :　Cookies.get('type'),
@@ -436,7 +436,7 @@
          })
        }else {
          params=Object.assign({},{
-           dispose: this.search.dispose,
+           dispose: this.search.dispose ,
            isRead: this.search.isRead,
            riverId: this.search.river,
            departtype: Cookies.get('type')== 7 ? this.search.departtype :　Cookies.get('type'),

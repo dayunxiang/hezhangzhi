@@ -149,6 +149,7 @@
             this.post('/addNotification', {
               title: this.form.title,
               content: this.form.desc,
+              type:1,
               fromWho: Cookies.get('userid') ? Cookies.get('userid') : 31
             }).then(resp => {
 

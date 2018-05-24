@@ -221,7 +221,7 @@
           riverId: this.checkriverid,
           toWho: this.toWho,
           fromWho: Cookies.get('userid') ? Cookies.get('userid') : 31,
-          type: 3,
+          type: 2,
           title: '巡河提醒'
         }).then(resp => {
           this.$Message.success('Success!');
